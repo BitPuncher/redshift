@@ -10,7 +10,10 @@ ActiveRecord::Base.transaction do
 
 	terran.star = Star.create({ name:"Sol", mass:40, diameter:10 })
 
-	terran.planets.create({ name:"Mercury", diameter:2, radius:20 })
-	terran.planets.create({ name:"Earth", diameter:4, radius:40 })
-	terran.planets.create({ name:"Jupiter", diameter:8, radius:80 })
+	terran.planets.create({ name:"Mercury", diameter:2, radius:10, 
+		orbit_duration:20, current_orbit:rand*20 })
+	terran.planets.create({ name:"Earth", diameter:4, radius:30, 
+		orbit_duration:40, current_orbit:rand*40 })
+	terran.planets.create({ name:"Jupiter", diameter:8, radius:50, 
+		orbit_duration:80, current_orbit:rand*80 })
 end

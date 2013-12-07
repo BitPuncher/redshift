@@ -7,13 +7,16 @@ Redshift.Models.System = Backbone.Model.extend({
 		return "api/systems/" + this.get('system_id');
 	},
 
-	parse: function (response) {
-		this.planets = new Redshift.Collections.Planets(response['planets']);
-		delete response['planets'];
+	parse: function (data) {
+		var that = this;
 
-		this.star = new Redshift.Models.Star(response['star']);
-		delete response['star'];
+		this.planets = new Redshift.Collections.Planets(data['planets'],
+		 { parse:true, system:that });
+		delete data['planets'];
 
-		return response;
+		this.star = new Redshift.Models.Star(data['star']);
+		delete data['star'];
+
+		return data;
 	}
 })

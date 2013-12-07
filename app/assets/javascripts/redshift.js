@@ -4,6 +4,7 @@ window.Redshift = {
   Views: {},
   Routers: {},
   initialize: function() {
+  	Redshift.Timers = {};
 	  new Redshift.Routers.App();
 
 	  Backbone.history.start();
