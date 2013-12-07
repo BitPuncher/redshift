@@ -4,7 +4,9 @@ window.Redshift = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+	  new Redshift.Routers.App();
+
+	  Backbone.history.start();
   }
 };
 

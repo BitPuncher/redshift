@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131206200214) do
+ActiveRecord::Schema.define(:version => 20131206232802) do
 
   create_table "planets", :force => true do |t|
     t.string   "name",                                 :null => false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20131206200214) do
     t.string   "orbit_type",     :default => "circle", :null => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
+    t.integer  "system_id"
   end
 
   add_index "planets", ["name"], :name => "index_planets_on_name"
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20131206200214) do
     t.integer  "diameter",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "system_id"
   end
 
   add_index "stars", ["name"], :name => "index_stars_on_name"

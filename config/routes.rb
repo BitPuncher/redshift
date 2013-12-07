@@ -5,4 +5,6 @@ Redshift::Application.routes.draw do
     end
     resources :planets, :only => [:show, :edit, :update, :destroy]
   end
+
+  root to: "static_pages#root"
 end
