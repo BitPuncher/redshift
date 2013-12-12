@@ -12,7 +12,8 @@ Redshift.Views.SystemView = Backbone.View.extend({
 
 	draw: function () {
 		var that = this;
-		this.ctx.clearRect(0,0, 600, 600);
+		this.ctx.clearRect(0,0, this.system.get('diameter'), 
+			this.system.get('diameter'));
 
 		this.system.planets.each(function(planet) {
 			planet.draw(that.ctx);
