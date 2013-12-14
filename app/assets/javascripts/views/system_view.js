@@ -1,7 +1,8 @@
 Redshift.Views.SystemView = Backbone.View.extend({
 	initialize: function(options) {
-		this.ctx = options['context'];
+		this.stage = options['stage'];
 		this.system = options['system'];
+		this.container = new createjs.Container();
 	},
 
 	step: function (fps) {

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require easeljs-0.7.0.min
 //= require redshift
 //= require_tree ./models
 //= require_tree ./collections

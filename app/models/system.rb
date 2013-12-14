@@ -4,4 +4,6 @@ class System < ActiveRecord::Base
 
   has_many :planets
   has_one :star
+
+  belongs_to :galaxy
 end

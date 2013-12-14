@@ -25,8 +25,8 @@ Redshift.Models.Planet = Backbone.Model.extend({
 		ctx.stroke();
 	},
 
-	step: function(fps) {
-		var new_orbit = this.get('current_orbit') + (5/fps);
+	tick: function(fps) {
+		var new_orbit = (this.get('current_orbit') + (5/fps)) % this.get('orbit_duration');
 		this.set('current_orbit', new_orbit);
 	},
 

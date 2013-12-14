@@ -7,19 +7,25 @@ Redshift.Routers.App = Backbone.Router.extend({
 		Redshift.Terran = new Redshift.Models.System({ 'system_id':1 });
 		Redshift.Terran.fetch({ 'parse': true,
 			success: function () {
-				var ctx = document.getElementById('canvas').getContext("2d");
-				var gameView = new Redshift.Views.SystemView({
-					"context": ctx,
-					"system": Redshift.Terran,
+
+				//make this not global eventually, when I'm done testing
+				stage = new createjs.Stage('canvas');
+
+				// var ctx = document.getElementById('canvas').getContext("2d");
+				var gameView = new Redshift.Views.GameView({
+					system: Redshift.Terran,
+					stage: stage,
 				});
 
-				var fps = 30
+				gameView.render();
 
-				Redshift.Timers['drawTimer'] = window.setInterval(function () {
-					gameView.step(fps);
-					gameView.draw();
-				}, (1000/fps));
-				//here create view to start drawing the stuff in canvas
+				createjs.Ticker.setFPS(30);
+				createjs.Ticker.addEventListener('tick', function () {
+					if (!createjs.Ticker.getPaused()){
+						stage.update();
+					}
+				});
+
 			},
 		});
 	},
