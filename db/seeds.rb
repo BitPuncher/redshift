@@ -24,10 +24,10 @@ ActiveRecord::Base.transaction do
 
 	alpha_centauri.star = Star.create({ name:"AC1", mass:40, diameter:10 })
 
-	terran.planets.create({ name:"AC2", diameter:6, radius:40, 
+	alpha_centauri.planets.create({ name:"AC2", diameter:6, radius:40, 
 		orbit_duration:35, current_orbit:rand*35 })
-	terran.planets.create({ name:"AC3", diameter:4, radius:30, 
+	alpha_centauri.planets.create({ name:"AC3", diameter:4, radius:30, 
 		orbit_duration:91, current_orbit:rand*91 })
-	terran.planets.create({ name:"AC4", diameter:3, radius:50, 
+	alpha_centauri.planets.create({ name:"AC4", diameter:3, radius:50, 
 		orbit_duration:23, current_orbit:rand*23 })
 end
