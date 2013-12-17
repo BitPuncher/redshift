@@ -40,5 +40,6 @@ Redshift.Views.SystemView = Backbone.View.extend({
 					(2 * Math.PI))) * shape.planet.get('radius');
 
 			});
+		})
 	},
 })
