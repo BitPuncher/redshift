@@ -1,7 +1,5 @@
 Redshift.Views.SystemView = Backbone.View.extend({
 	initialize: function(options) {
-		this.stage = options['stage'];
-		this.system = options['system'];
 		this.container = new createjs.Container();
 	},
 
@@ -22,24 +20,38 @@ Redshift.Views.SystemView = Backbone.View.extend({
 	// },
 
 	render: function() {
-		this.system.planets.forEach( function(planet) {
-			var planet_shape = new createjs.Shape();
-			
-			planet_shape.graphics.f('black').dc(0, 0, planet.get('diameter') / 2);
 
-			planet_shape.addEventListener('tick', function (event) {
-				shape = event.currentTarget;
-				shape.planet.tick(createjs.Ticker.getFPS());
+		var orbit_shapes = new createjs.Container();
+		var planet_shapes = new createjs.Container();
 
-				shape.x = Math.cos(((Math.PI * 2 * 
-					(shape.planet.get('current_orbit') / shape.planet.get('orbit_duration'))) % 
-					(2 * Math.PI))) * shape.planet.get('radius');
+		this.model.planets.forEach( function(planet) {
+			var planetView = new Redshift.Views.PlanetView({ model: planet });
+			planet_shapes.addChild(planetView.render());
 
-				shape.y = Math.sin(((Math.PI * 2 * 
-					(shape.planet.get('current_orbit') / shape.planet.get('orbit_duration'))) % 
-					(2 * Math.PI))) * shape.planet.get('radius');
+			var orbitView = new Redshift.Views.OrbitView({ model: planet });
+			orbit_shapes.addChild(orbitView.render());
+		});
 
-			});
-		})
+		this.container.addChild(orbit_shapes);
+		this.container.addChild(planet_shapes);
+
+		// something about suns
+
+		// something about system orbit
+
+		var that = this;
+
+		this.container.addEventListener('tick', function(event) {
+			var container = event.currentTarget;
+			that.model.tick(createjs.Ticker.getFPS());
+
+			container.x = OrbitMath.xOrbit(that.model.get('current_orbit'),
+				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
+
+			container.y = OrbitMath.yOrbit(that.model.get('current_orbit'),
+				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
+		});
+
+		return this.container;
 	},
 })

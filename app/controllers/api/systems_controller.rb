@@ -6,4 +6,10 @@ class Api::SystemsController < ApplicationController
 
 		render :json => @system, :include => [:star, :planets]
 	end
+
+	def index
+		@systems = System.all
+
+		render :json => @systems, :include => [:star, :planets]
+	end
 end

@@ -4,8 +4,8 @@ Redshift.Routers.App = Backbone.Router.extend({
 	},
 
 	game: function() {
-		Redshift.Terran = new Redshift.Models.System({ 'system_id':1 });
-		Redshift.Terran.fetch({ 'parse': true,
+		Redshift.Systems = new Redshift.Collections.Systems();
+		Redshift.Systems.fetch({ 'parse': true,
 			success: function () {
 
 				//make this not global eventually, when I'm done testing
@@ -13,7 +13,7 @@ Redshift.Routers.App = Backbone.Router.extend({
 
 				// var ctx = document.getElementById('canvas').getContext("2d");
 				var gameView = new Redshift.Views.GameView({
-					system: Redshift.Terran,
+					collection: Redshift.Systems,
 					stage: stage,
 				});
 

@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131214235008) do
+ActiveRecord::Schema.define(:version => 20131218022504) do
 
   create_table "galaxies", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "radius"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",         :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "orbit_radius"
   end
 
   add_index "galaxies", ["name"], :name => "index_galaxies_on_name"
@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(:version => 20131214235008) do
   create_table "planets", :force => true do |t|
     t.string   "name",                                 :null => false
     t.integer  "diameter",                             :null => false
-    t.integer  "radius",                               :null => false
     t.integer  "orbit_duration"
     t.integer  "current_orbit"
     t.string   "orbit_type",     :default => "circle", :null => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "system_id"
+    t.integer  "orbit_radius"
   end
 
   add_index "planets", ["name"], :name => "index_planets_on_name"
@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(:version => 20131214235008) do
   create_table "systems", :force => true do |t|
     t.string   "name",                                 :null => false
     t.integer  "diameter",                             :null => false
-    t.integer  "radius",                               :null => false
     t.integer  "orbit_duration"
     t.integer  "current_orbit"
     t.string   "orbit_type",     :default => "circle", :null => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "galaxy_id"
+    t.integer  "orbit_radius"
   end
 
   add_index "systems", ["name"], :name => "index_systems_on_name"

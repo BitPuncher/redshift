@@ -1,5 +1,5 @@
 class System < ActiveRecord::Base
-  attr_accessible :name, :radius, :orbit_duration, :current_orbit, :orbit_type, 
+  attr_accessible :name, :orbit_radius, :orbit_duration, :current_orbit, :orbit_type, 
   :diameter
 
   has_many :planets
