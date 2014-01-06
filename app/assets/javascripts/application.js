@@ -16,8 +16,7 @@
 //= require backbone
 //= require easeljs-0.7.0.min
 //= require redshift
-//= require orbit_math
-//= require util
+//= require_tree ./util
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

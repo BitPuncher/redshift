@@ -46,8 +46,6 @@
 			object = object.parent;
 		}
 
-		// debugger
-
 		object.x += (adjustX - (this._lastAdjustX || 0));
 		object.y += (adjustY - (this._lastAdjustY || 0));
 
