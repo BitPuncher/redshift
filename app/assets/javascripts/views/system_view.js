@@ -45,10 +45,10 @@ Redshift.Views.SystemView = Backbone.View.extend({
 			var container = event.currentTarget;
 			that.model.tick(createjs.Ticker.getFPS());
 
-			container.x = OrbitMath.xOrbit(that.model.get('current_orbit'),
+			container.x = Redshift.Utils.OrbitMath.xOrbit(that.model.get('current_orbit'),
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
 
-			container.y = OrbitMath.yOrbit(that.model.get('current_orbit'),
+			container.y = Redshift.Utils.OrbitMath.yOrbit(that.model.get('current_orbit'),
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
 		});
 

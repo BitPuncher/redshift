@@ -15,10 +15,10 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 
 			// probably should put shape position calculation in the model file
 
-			shape.x = OrbitMath.xOrbit(that.model.get('current_orbit'), 
+			shape.x = Redshift.Utils.OrbitMath.xOrbit(that.model.get('current_orbit'), 
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
 
-			shape.y = OrbitMath.yOrbit(that.model.get('current_orbit'), 
+			shape.y = Redshift.Utils.OrbitMath.yOrbit(that.model.get('current_orbit'), 
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
 		});
 
