@@ -20,6 +20,7 @@
 	var set = Focus.prototype.set = function (focus) {
 		this.clear();
 		this._currentFocus = focus;
+		this.refocus();
 	}
 
 	var get = Focus.prototype.get = function () {
@@ -34,6 +35,8 @@
 	}
 
 	var refocus = Focus.prototype.refocus = function () {
+
+		//can use DisplayObject.localToGlobal(x, y) to get global position. gd.
 		var object = this._currentFocus;
 		if (object == null) { return };
 

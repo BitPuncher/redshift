@@ -17,23 +17,6 @@ Redshift.Views.GameView = Backbone.View.extend({
 			that.container.addChild(systemView.render());
 		});
 
-		// var star_shape = new createjs.Shape();
-
-		// star_shape.x = 0;
-		// star_shape.y = 0;
-
-		// star_shape.star = this.system.star;
-
-		// star_shape.graphics.f('yellow').dc(0, 0, star_shape.star.get('diameter') / 2);
-
-		// star_shape.addEventListener('tick', function (event) {
-		// 	//nothing for now	
-		// });
-
-		// this.system.star.shape = star_shape;
-
-		// this.container.addChild(star_shape);
-
 		this.stage.addChild(this.container);
 	}
 })

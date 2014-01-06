@@ -3,13 +3,14 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 	},
 
 	render: function () {
-		planet_shape = new createjs.Shape();
+		var planetShape = new createjs.Shape();
 
-		planet_shape.graphics.f('black').dc(0, 0, this.model.get('diameter') / 2);
+		planetShape.graphics.f('black').dc(0, 0, this.model.get('diameter') / 2);
+		planetShape.name = this.model.get('name');
 
 		var that = this;
 
-		planet_shape.addEventListener('tick', function (event) {
+		planetShape.addEventListener('tick', function (event) {
 			shape = event.currentTarget;
 			that.model.tick(createjs.Ticker.getFPS());
 
@@ -22,8 +23,8 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));
 		});
 
-		this.model.shape = planet_shape;
+		this.model.shape = planetShape;
 
-		return planet_shape;
+		return planetShape;
 	},
 })
