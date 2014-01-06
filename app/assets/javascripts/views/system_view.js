@@ -21,19 +21,23 @@ Redshift.Views.SystemView = Backbone.View.extend({
 
 	render: function() {
 
-		var orbit_shapes = new createjs.Container();
-		var planet_shapes = new createjs.Container();
+		// var orbit_shapes = new createjs.Container();
+		// var planet_shapes = new createjs.Container();
+		var shapes = new createjs.Container();
 
 		this.model.planets.forEach( function(planet) {
 			var planetView = new Redshift.Views.PlanetView({ model: planet });
-			planet_shapes.addChild(planetView.render());
+			// planet_shapes.addChild(planetView.render());
+			shapes.addChild(planetView.render());
 
 			var orbitView = new Redshift.Views.OrbitView({ model: planet });
-			orbit_shapes.addChild(orbitView.render());
+			// orbit_shapes.addChild(orbitView.render());
+			shapes.addChild(orbitView.render());
 		});
 
-		this.container.addChild(orbit_shapes);
-		this.container.addChild(planet_shapes);
+		// this.container.addChild(orbit_shapes);
+		// this.container.addChild(planet_shapes);
+		this.container.addChild(shapes);
 
 		// something about suns
 

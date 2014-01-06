@@ -29,24 +29,30 @@
 	var clear = Focus.prototype.clear = function () {
 		this._unfocus();
 		this._currentFocus = null;
-		this._lastX = null;
-		this._lastY = null;
+		this._lastAdjustX = null;
+		this._lastAdjustY = null;
 	}
 
 	var refocus = Focus.prototype.refocus = function () {
 		var object = this._currentFocus;
 		if (object == null) { return };
 
-		var adjustX = object.x - (this._lastX || 0);
-		var adjustY = object.y - (this._lastY || 0);
-		this._lastX = object.x;
-		this._lastY = object.y;
+		var adjustX = 0;
+		var adjustY = 0;
 
-		while (object.parent != null) {
-			object.x -= adjustX;
-			object.y -= adjustY;
+		while (object.parent.parent != null) {
+			adjustX -= object.x;
+			adjustY -= object.y;
 			object = object.parent;
 		}
+
+		// debugger
+
+		object.x += (adjustX - (this._lastAdjustX || 0));
+		object.y += (adjustY - (this._lastAdjustY || 0));
+
+		this._lastAdjustX = adjustX;
+		this._lastAdjustY = adjustY;
 	}
 
 	var Redshift = root.Redshift = (root.Redshift || {});
