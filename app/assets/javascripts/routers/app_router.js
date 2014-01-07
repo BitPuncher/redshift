@@ -17,15 +17,13 @@ Redshift.Routers.App = Backbone.Router.extend({
 				});
 
 				gameView.render();
-				Redshift.Focus = new Redshift.Utils.Focus(gameView.container.x, gameView.container.y);
+				Redshift.Focus = new Redshift.Utils.Focus(gameView.container);
 
 				createjs.Ticker.setFPS(30);
-				createjs.Ticker.addEventListener('tick', function () {
-					if (!createjs.Ticker.getPaused()){
-						stage.update();
-						if (Redshift.Focus.get()) {
-							Redshift.Focus.refocus();
-						}
+				createjs.Ticker.addEventListener('tick', function (event) {
+					stage.update();
+					if (Redshift.Focus.get()) {
+						Redshift.Focus.refocus();
 					}
 				});
 

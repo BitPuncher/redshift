@@ -1,26 +1,22 @@
 (function(root) {
-	var Focus = function (centerX, centerY) {
+	var Focus = function (topContainer) {
 		this._currentFocus = null;
-		this._lastX = null;
-		this._lastY = null;
-
-		this._unfocus = function () {
-			var object = this._currentFocus;
-			if (object == null) { return };
-
-			while (object.parent.parent != null) {
-				object = object.parent;
-			}
-
-			object.x = centerX;
-			object.y = centerY;
-		}
+		this._topContainer = topContainer;
 	};
 
+	var unfocus = Focus.prototype.unfocus = function () {
+		this._topContainer.regX = 0;
+		this._topContainer.regY = 0;
+		this._topContainer.scaleX = 1;
+		this._topContainer.scaleY = 1;
+	}
+
 	var set = Focus.prototype.set = function (focus) {
-		this.clear();
 		this._currentFocus = focus;
 		this.refocus();
+		var scale = this._topContainer.getBounds()['height'] / this._currentFocus.getBounds()['height'];
+		this._topContainer.scaleX = scale;
+		this._topContainer.scaleY = scale;
 	}
 
 	var get = Focus.prototype.get = function () {
@@ -28,32 +24,22 @@
 	}
 
 	var clear = Focus.prototype.clear = function () {
-		this._unfocus();
+		this.unfocus();
 		this._currentFocus = null;
-		this._lastAdjustX = null;
-		this._lastAdjustY = null;
 	}
 
-	var refocus = Focus.prototype.refocus = function () {
+	var refocus = Focus.prototype.refocus = function (scale) {
+		var focus = this._currentFocus;
+		var adjustment = new createjs.Point();
 
-		//can use DisplayObject.localToGlobal(x, y) to get global position. gd.
-		var object = this._currentFocus;
-		if (object == null) { return };
-
-		var adjustX = 0;
-		var adjustY = 0;
-
-		while (object.parent.parent != null) {
-			adjustX -= object.x;
-			adjustY -= object.y;
-			object = object.parent;
+		while (focus.parent != null) {
+			adjustment.x += focus.x;
+			adjustment.y += focus.y;
+			focus = focus.parent;
 		}
 
-		object.x += (adjustX - (this._lastAdjustX || 0));
-		object.y += (adjustY - (this._lastAdjustY || 0));
-
-		this._lastAdjustX = adjustX;
-		this._lastAdjustY = adjustY;
+		this._topContainer.regX = adjustment.x - this._topContainer.x;
+		this._topContainer.regY = adjustment.y - this._topContainer.y;
 	}
 
 	var Redshift = root.Redshift = (root.Redshift || {});

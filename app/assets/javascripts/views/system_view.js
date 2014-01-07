@@ -1,8 +1,6 @@
 Redshift.Views.SystemView = Backbone.View.extend({
 	initialize: function(options) {
 		this.container = new createjs.Container();
-		var radius = this.model.get('diameter') / 2;
-		this.container.setBounds(-radius, -radius, radius * 2, radius * 2);
 	},
 
 	render: function() {
@@ -21,6 +19,8 @@ Redshift.Views.SystemView = Backbone.View.extend({
 	},
 
 	_adjustOrbit: function (event) {
+		if (createjs.Ticker.getPaused()) { return }
+
 		var container = event.currentTarget;
 		this.model.tick(createjs.Ticker.getFPS());
 
@@ -41,9 +41,12 @@ Redshift.Views.SystemView = Backbone.View.extend({
 
 	_addSystemShape: function () {
 		var systemShape = new createjs.Shape();
-		systemShape.graphics.f('black').dc(0, 0, (this.model.get('diameter') / 2) + 5);
+
+		var radius = this.model.get('diameter');
+		systemShape.graphics.f('black').dc(0, 0, (radius / 2) + 5);
 		systemShape.name = this.model.get('name');
 		systemShape.alpha = .01;
+		systemShape.setBounds(-radius, -radius, radius * 2, radius * 2);
 
 		this.container.addChild(systemShape);
 	},

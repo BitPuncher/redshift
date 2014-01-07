@@ -5,13 +5,18 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 	render: function () {
 		var planetShape = new createjs.Shape();
 
-		planetShape.graphics.f('black').dc(0, 0, this.model.get('diameter') / 2);
+		var radius = this.model.get('diameter');
+
+		planetShape.graphics.f('black').dc(0, 0, radius / 2);
 		planetShape.name = this.model.get('name');
+		planetShape.setBounds(-radius, -radius, radius * 2, radius * 2);
 
 		var that = this;
 
 		planetShape.addEventListener('tick', function (event) {
-			shape = event.currentTarget;
+			if (createjs.Ticker.getPaused()) { return }
+
+			var shape = event.currentTarget;
 			that.model.tick(createjs.Ticker.getFPS());
 
 			// probably should put shape position calculation in the model file
