@@ -15,6 +15,10 @@ Redshift.Views.StarView = Backbone.View.extend({
 
 		});
 
+		starShape.addEventListener('click', function(event) {
+			Redshift.Focus.set(event.target);
+		});
+
 		return starShape;
 	},
 })

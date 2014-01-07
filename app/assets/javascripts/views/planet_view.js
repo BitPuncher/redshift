@@ -13,6 +13,10 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 
 		var that = this;
 
+		planetShape.addEventListener('click', function(event) {
+			Redshift.Focus.set(event.target);
+		});
+
 		planetShape.addEventListener('tick', function (event) {
 			if (createjs.Ticker.getPaused()) { return }
 

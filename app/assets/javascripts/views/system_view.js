@@ -11,9 +11,9 @@ Redshift.Views.SystemView = Backbone.View.extend({
 		this.container.addChild(starView.render());
 
 		this.container.addEventListener('tick', this._adjustOrbit.bind(this) );
-		this.container.addEventListener('click', function(event) {
-			Redshift.Focus.set(event.target);
-		});
+
+		//this bubbles down to all children, which is fine, except for orbit routes
+		
 
 		return this.container;
 	},
@@ -47,6 +47,10 @@ Redshift.Views.SystemView = Backbone.View.extend({
 		systemShape.name = this.model.get('name');
 		systemShape.alpha = .01;
 		systemShape.setBounds(-radius, -radius, radius * 2, radius * 2);
+		
+		systemShape.addEventListener('click', function(event) {
+			Redshift.Focus.set(event.target);
+		});
 
 		this.container.addChild(systemShape);
 	},

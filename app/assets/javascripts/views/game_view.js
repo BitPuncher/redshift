@@ -23,6 +23,20 @@ Redshift.Views.GameView = Backbone.View.extend({
 
 		this.container.setBounds(-width / 2, -height / 2, width, height);
 
+		var galaxyShape = new createjs.Shape();
+		galaxyShape.x = this.container.x;
+		galaxyShape.y = this.container.y;
+		galaxyShape.graphics.f('black').r(-this.container.x, -this.container.y, width, height);
+		// galaxyShape.name = this.model.get('name');
+		galaxyShape.alpha = .01;
+		galaxyShape.setBounds(-galaxyShape.x, -galaxyShape.y, galaxyShape.x * 2, galaxyShape.y * 2);
+
+		galaxyShape.addEventListener('click', function(event) {
+			Redshift.Focus.set(event.target);
+		});
+
+		this.stage.addChild(galaxyShape);
+
 		this.stage.addChild(this.container);
 	}
 })
