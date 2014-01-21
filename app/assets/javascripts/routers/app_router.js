@@ -4,6 +4,8 @@ Redshift.Routers.App = Backbone.Router.extend({
 	},
 
 	game: function() {
+		var baseFPS = 30;
+
 		Redshift.Systems = new Redshift.Collections.Systems();
 		Redshift.Systems.fetch({ 'parse': true,
 			success: function () {
@@ -19,7 +21,7 @@ Redshift.Routers.App = Backbone.Router.extend({
 				gameView.render();
 				Redshift.Focus = new Redshift.Utils.Focus(gameView.container);
 
-				createjs.Ticker.setFPS(30);
+				createjs.Ticker.setFPS(baseFPS);
 				createjs.Ticker.addEventListener('tick', function (event) {
 					stage.update();
 					if (Redshift.Focus.get()) {
@@ -29,5 +31,8 @@ Redshift.Routers.App = Backbone.Router.extend({
 
 			},
 		});
+
+		var timeControls = new Redshift.Views.TimeControlView({ $el: $('#timeBox'), baseFPS: baseFPS });
+		timeControls.render();
 	},
 })

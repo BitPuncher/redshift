@@ -21,9 +21,6 @@ Redshift.Views.PlanetView = Backbone.View.extend({
 			if (createjs.Ticker.getPaused()) { return }
 
 			var shape = event.currentTarget;
-			that.model.tick(createjs.Ticker.getFPS());
-
-			// probably should put shape position calculation in the model file
 
 			shape.x = Redshift.Utils.OrbitMath.xOrbit(that.model.get('current_orbit'), 
 				that.model.get('orbit_duration'), that.model.get('orbit_radius'));

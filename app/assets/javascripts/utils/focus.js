@@ -1,6 +1,6 @@
 (function(root) {
 	var Focus = function (topContainer) {
-		this._currentFocus = null;
+		this._currentFocus = topContainer;
 		this._topContainer = topContainer;
 	};
 

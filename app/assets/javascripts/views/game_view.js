@@ -35,6 +35,8 @@ Redshift.Views.GameView = Backbone.View.extend({
 			Redshift.Focus.set(event.target);
 		});
 
+
+
 		this.stage.addChild(galaxyShape);
 
 		this.stage.addChild(this.container);
